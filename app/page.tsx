@@ -53,7 +53,13 @@ export default function Dashboard() {
       .then(res => res.json())
       .then((data: any[]) => {
         const map: Record<number, Reading> = {};
-        data.forEach(r => map[r.unit_id] = r);
+        data.forEach(r => {
+          map[r.unit_id] = {
+            ...r,
+            temperature: parseFloat(r.temperature),
+            humidity: parseFloat(r.humidity)
+          };
+        });
         setLiveReadings(map);
       })
       .catch(console.error);

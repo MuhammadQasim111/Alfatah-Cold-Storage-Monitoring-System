@@ -47,13 +47,13 @@ const LiveCard: React.FC<LiveCardProps> = ({
           <p className="text-xs text-slate-500 uppercase">Temp</p>
           <p className={`text-2xl font-mono font-semibold ${(temperature || 0) > 10 ? 'text-red-600' : 'text-slate-700'
             }`}>
-            {typeof temperature === 'number' ? `${temperature.toFixed(1)}°C` : '--'}
+            {typeof temperature === 'number' && !isNaN(temperature) ? `${temperature.toFixed(1)}°C` : '--'}
           </p>
         </div>
         <div className="bg-slate-50 p-3 rounded-lg">
           <p className="text-xs text-slate-500 uppercase">Humidity</p>
           <p className="text-2xl font-mono font-semibold text-blue-600">
-            {typeof humidity === 'number' ? `${humidity.toFixed(1)}%` : '--'}
+            {typeof humidity === 'number' && !isNaN(humidity) ? `${humidity.toFixed(1)}%` : '--'}
           </p>
         </div>
       </div>
