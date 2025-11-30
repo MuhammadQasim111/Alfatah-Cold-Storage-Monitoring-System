@@ -1,10 +1,1 @@
-{
-  "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/api/readings/log": "pages/api/readings/log.js",
-  "/api/storage-units": "pages/api/storage-units.js",
-  "/api/alerts": "pages/api/alerts.js",
-  "/api/readings/latest": "pages/api/readings/latest.js",
-  "/api/readings/history": "pages/api/readings/history.js"
-}
+{"/_app":"pages/_app.js","/_error":"pages/_error.js","/api/alerts":"pages/api/alerts.js","/api/readings/history":"pages/api/readings/history.js","/api/readings/latest":"pages/api/readings/latest.js","/api/readings/log":"pages/api/readings/log.js","/api/storage-units":"pages/api/storage-units.js","/_document":"pages/_document.js","/404":"pages/404.html"}

@@ -71,13 +71,15 @@ const Chart24h: React.FC<Chart24hProps> = ({ unitId, data, unitName }) => {
     maintainAspectRatio: false,
     interaction: {
       mode: 'index' as const,
-      intersect: false,
     },
-    stacked: false,
     plugins: {
       title: {
         display: true,
         text: `${unitName} - 24 Hour History`,
+      },
+      tooltip: {
+        mode: 'index',
+        intersect: false,
       },
     },
     scales: {
