@@ -1,0 +1,5 @@
+{
+  "name": "Smart Cold Storage Monitor",
+  "description": "A Next.js application for monitoring cold storage units with real-time MQTT data, historical logging via Neon Postgres, and alerting.",
+  "requestFramePermissions": []
+}
