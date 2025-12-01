@@ -28,6 +28,7 @@ export default function Dashboard() {
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [mode, setMode] = useState<'realtime' | 'historical'>('realtime');
   const [loadingHistory, setLoadingHistory] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
 
   // 1. Fetch Metadata (Units)
   useEffect(() => {
@@ -69,8 +70,22 @@ export default function Dashboard() {
   useEffect(() => {
     const client = connectToBroker();
 
-    client.subscribe('coldstorage/+/readings');
-    client.subscribe('coldstorage/alerts');
+    client.on('connect', () => {
+      console.log('MQTT Connected');
+      setIsConnected(true);
+      client.subscribe('coldstorage/+/readings');
+      client.subscribe('coldstorage/alerts');
+    });
+
+    client.on('close', () => {
+      console.log('MQTT Disconnected');
+      setIsConnected(false);
+    });
+
+    client.on('error', (err) => {
+      console.error('MQTT Error:', err);
+      setIsConnected(false);
+    });
 
     client.on('message', (topic, message) => {
       const payload = JSON.parse(message.toString());
@@ -132,7 +147,14 @@ export default function Dashboard() {
       <header className="mb-8 flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-slate-900">Cold Storage Monitor</h1>
-          <p className="text-slate-500">Real-time Environmental Tracking System</p>
+          <div className="flex items-center gap-2 mt-1">
+            <p className="text-slate-500">Real-time Environmental Tracking System</p>
+            <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${isConnected ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+              }`}>
+              <span className={`w-2 h-2 mr-1.5 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></span>
+              {isConnected ? 'Live' : 'Disconnected'}
+            </span>
+          </div>
         </div>
         <div className="flex gap-4">
           <div className="flex bg-slate-100 p-1 rounded-lg">
